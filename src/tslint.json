@@ -12,6 +12,8 @@
             "element",
             "app",
             "kebab-case"
-        ]
+        ],
+        "use-host-property-decorator": false,
+        "no-output-on-prefix": false
     }
 }

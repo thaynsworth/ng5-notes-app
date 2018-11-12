@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Card } from './models/card';
+import { CardService } from './services/card.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ng5-notes-app';
+  public cards$: Observable<Card[]>;
+
+  constructor(private cardService: CardService) {
+    this.cards$ = this.cardService.getCardsList();
+  }
+
+  addCard(cardText: string) {
+    this.cardService.createCard(new Card(cardText));
+  }
 }
