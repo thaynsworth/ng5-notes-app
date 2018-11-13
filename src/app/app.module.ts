@@ -15,13 +15,24 @@ import { CardComponent } from './card/card.component';
 import { CardListComponent } from './card-list/card-list.component';
 import { NewCardInputComponent } from './new-card-input/new-card-input.component';
 import { CardService } from './services/card.service';
+import { AboutComponent } from './about/about.component';
+import { MainComponent } from './main/main.component';
+import { Routes, RouterModule, Router } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', redirectTo: 'cards', pathMatch: 'full'},
+  {path: 'cards', component: MainComponent},
+  {path: 'about', component: AboutComponent},
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
     CardListComponent,
-    NewCardInputComponent
+    NewCardInputComponent,
+    AboutComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +42,8 @@ import { CardService } from './services/card.service';
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([CardsEffects]),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [
     CardService,
